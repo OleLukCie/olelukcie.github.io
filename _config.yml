@@ -8,7 +8,6 @@ excerpt_separator: "<!-- more -->"
 
 
 header_pages:
-  - README.md
   - blog.html
 
 plugins:
