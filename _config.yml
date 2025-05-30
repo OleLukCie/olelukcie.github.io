@@ -1,3 +1,16 @@
 theme: jekyll-theme-minimal
 title: OleLukCie's homepage
 description: Bookmark this to keep an eye on my project updates!
+
+paginate: 5
+paginate_path: "/blog/page:num/"
+excerpt_separator: "<!-- more -->"
+
+
+header_pages:
+  - README.md
+  - blog.html
+
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
