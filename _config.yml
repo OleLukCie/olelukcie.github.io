@@ -14,3 +14,10 @@ header_pages:
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
+
+seo:
+  title: "OleLukCie Animation Blog"
+  description: "Focusing on animation production, sharing project dynamics and technical experience"
+  social:
+    name: "OleLukCie Animation Studio"
+    links: ["https://github.com/OleLukCie"] 
