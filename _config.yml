@@ -1,0 +1,29 @@
+theme: jekyll-theme-minimal
+title: OleLukCie Animation Studio
+description: Explore animation projects, technical insights, and industry trends from OleLukCie
+
+paginate: 5
+paginate_path: "/blog/page:num/"
+excerpt_separator: "<!-- more -->"
+
+header_pages:
+  - index.html
+  - blog.html
+  - categories.html
+  - about.html
+  - projects.html
+
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+
+seo:
+  title: "OleLukCie Animation Blog"
+  description: "Focused on 2D/3D animation production, sharing project updates, technical tutorials, and industry analysis"
+  social:
+    name: "OleLukCie Animation Studio"
+    links: 
+      - "https://github.com/OleLukCie"
+      - "https://twitter.com/olelukcie"
+
+repository: OleLukCie/olelukcie.github.io
