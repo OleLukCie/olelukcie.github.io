@@ -1,0 +1,74 @@
+---
+layout: default
+title: About
+---
+
+<div class="about-container">
+  <h1 class="section-title">About OleLukCie</h1>
+  
+  <div class="about-content">
+    <p>We are a creative studio specializing in 2D/3D animation production, dedicated to crafting visually compelling stories and sharing our technical journey.</p>
+    
+    <div class="studio-focus">
+      <h2>Our Focus Areas</h2>
+      <ul>
+        <li>Original animation short development</li>
+        <li>Custom commercial animation services</li>
+        <li>Animation technology R&D and knowledge sharing</li>
+      </ul>
+    </div>
+
+    <div class="team-info">
+      <h2>Meet the Team</h2>
+      <p>Small but mighty team of animators, designers, and technical artists with 5+ years of industry experience.</p>
+    </div>
+  </div>
+</div>
+
+<div id="web-container"></div>
+
+<script>
+  const webContainer = document.getElementById('web-container');
+  const maxLines = 10;
+  const lines = [];
+
+  function createLine() {
+    const line = document.createElement('div');
+    line.classList.add('web-line');
+    line.style.width = '1px';
+    line.style.height = '0';
+    line.style.left = Math.random() * window.innerWidth + 'px';
+    line.style.top = Math.random() * window.innerHeight + 'px';
+    webContainer.appendChild(line);
+    lines.push(line);
+
+    if (lines.length > maxLines) {
+      const removedLine = lines.shift();
+      webContainer.removeChild(removedLine);
+    }
+  }
+
+  function updateLine(line) {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const lineX = parseFloat(line.style.left);
+    const lineY = parseFloat(line.style.top);
+    const dx = mouseX - lineX;
+    const dy = mouseY - lineY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    line.style.height = distance + 'px';
+    line.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+  }
+
+  function handleMouseMove(event) {
+    if (lines.length < maxLines) {
+      createLine();
+    }
+    lines.forEach(line => {
+      updateLine(line);
+    });
+  }
+
+  window.addEventListener('mousemove', handleMouseMove);
+</script>

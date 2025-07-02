@@ -1,0 +1,118 @@
+---
+layout: default
+title: Blog
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    /* Spider web effect styles */
+    #web-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .web-line {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <nav class="header-pages">
+        {% for page in site.header_pages %}
+        <a href="{{ page | relative_url }}">{{ page | replace: ".html", "" }}</a>
+        {% endfor %}
+      </nav>
+    </header>
+
+    <h2 class="section-title">All Posts</h2>
+    <div class="recent-posts">
+      {% for post in site.posts %}
+      {% include post-card.html %}
+      {% endfor %}
+    </div>
+
+    <!-- Pagination navigation -->
+    <div class="pagination">
+      {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Prev</a>
+      {% else %}
+      <span>&laquo; Prev</span>
+      {% endif %}
+
+      <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+
+      {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">Next &raquo;</a>
+      {% else %}
+      <span>Next &raquo;</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="web-container"></div>
+
+  <script>
+    const webContainer = document.getElementById('web-container');
+    const maxLines = 10;
+    const lines = [];
+
+    function createLine() {
+      const line = document.createElement('div');
+      line.classList.add('web-line');
+      line.style.width = '1px';
+      line.style.height = '0';
+      line.style.left = Math.random() * window.innerWidth + 'px';
+      line.style.top = Math.random() * window.innerHeight + 'px';
+      webContainer.appendChild(line);
+      lines.push(line);
+
+      if (lines.length > maxLines) {
+        const removedLine = lines.shift();
+        webContainer.removeChild(removedLine);
+      }
+    }
+
+    function updateLine(line) {
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+      const lineX = parseFloat(line.style.left);
+      const lineY = parseFloat(line.style.top);
+      const dx = mouseX - lineX;
+      const dy = mouseY - lineY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      line.style.height = distance + 'px';
+      line.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+    }
+
+    function handleMouseMove(event) {
+      if (lines.length < maxLines) {
+        createLine();
+      }
+      lines.forEach(line => {
+        updateLine(line);
+      });
+    }
+
+    window.addEventListener('mousemove', handleMouseMove);
+  </script>
+</body>
+
+</html>
